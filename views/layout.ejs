@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home Cook</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel=”stylesheet” href=”https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css”rel=”nofollow” integrity=”sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I” crossorigin=”anonymous”>
+        <link ref="stylesheet" type="text/css" href="dist/snackbar.min.css" /> <script src="dist/snackbar.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    </head>
+    <body>
+        <div class="sample-header">
+            <div class="sample-header-section">
+              <h1>Home Cook</h1>
+            </div>
+        </div>
+            <div class="navigation-bar" > 
+                <a class="navigation-bar-a" href="http://localhost:3000">Home</a>
+                <a class="navigation-bar-a" href="http://localhost:3000/courses">Courses</a>
+                <a class="navigation-bar-a" href="http://localhost:3000/users">Users</a>
+                <a class="navigation-bar-a" href="http://localhost:3000/subscribers">Subscribers</a>
+                <a class="navigation-bar-a" href="http://localhost:3000/chat">Chat</a>
+                <label class="navigation-bar-a" id="modal-button" type="button" data-toggle="modal" data-target="#myModal" >
+                    Latest Courses
+                </label>
+                <%if(loggedIn){ %>
+                    <a class="navigation-bar-a" href="<%= `/users/${currentUser._id}`%>"><%= currentUser.fullName%> (User)</a>
+                    <a class="navigation-bar-a" href="<%= `/users/logout` %>">Logout</a>
+                <% } else {%>
+                    <a class="navigation-bar-a" href="<%= `/users/login`%>">Login</a>
+                    <a class="navigation-bar-a" href="<%= `/users/new`%>">Register</a>  
+                <% } %>
+                <a class="navigation-bar-a" href="<%= `/subscribers/new`%>">Subscribe</a>
+            </div>
+        </div>
+        <div > 
+            <% if(flashMessages) {%>
+                <%if(flashMessages.success) {%>
+                    <div class="alert success" >
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <%= flashMessages.success%>
+                    </div>
+                <%} else if(flashMessages.error) {%>
+                    <div class="alert error">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <%= flashMessages.error%>
+                    </div>
+                <%}%>
+            <%}%>
+        </div>
+        <!-- <div id="chat-icon" class="notification-box">
+            <span class="notification-count" ></span>
+            <div class="notification-bell">
+              <span class="bell-top"></span>
+              <span class="bell-middle"></span>
+              <span class="bell-bottom"></span>
+              <span class="bell-rad"></span>
+            </div>
+        </div>    -->
+        <%- include('courses/_courseModal.ejs')%>
+        <%- body%>
+        <script type=" text/javascript" src='js/bootstrap.min.js' ></script>
+        <script type=" text/javascript" src='js/jQuery.min.js' ></script>
+        <script src="/socket.io/socket.io.js" > </script>
+        <script type="text/javascript" src='js/confettiCuisine.js' ></script>
+    </body>
+</html>
