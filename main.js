@@ -85,7 +85,4 @@ app.use('/', router);
 
 const server = app.listen(app.get('port'), () => {
     console.log(`Server has started and is listening on port : ${app.get('port')}`);
-}), 
-io = require("socket.io")(server);
-
-const chatController = require('./controllers/chatController')(io);
+});
