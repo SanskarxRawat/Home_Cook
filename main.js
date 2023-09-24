@@ -29,6 +29,8 @@ mongoose.Promise = global.Promise;
 
 app.set('port', process.env.PORT || 3000);
 
+app.set('views', path.join(__dirname, 'views'));
+
 app.set('view engine', 'ejs');
 
 app.set('token', process.env.TOKEN || "recipeT0K3N");
@@ -87,5 +89,3 @@ const server = app.listen(app.get('port'), () => {
 io = require("socket.io")(server);
 
 const chatController = require('./controllers/chatController')(io);
-
-module.exports=app;
